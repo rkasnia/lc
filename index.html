@@ -39,12 +39,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
   
-  var script_url = "https://script.google.com/macros/s/AKfycbxXxyBdUQXZI0pi9dgTE0HuFM8VwuKf2Kk0NVtAlFvKTSvpf3A/exec";
+var script_url = "https://script.google.com/macros/s/AKfycbyl7X8Azi_BewY9GnPSq7GRlBGwEip1OMWK9VtRMA/exec";
 
-// https://script.google.com/macros/s/AKfycbxXxyBdUQXZI0pi9dgTE0HuFM8VwuKf2Kk0NVtAlFvKTSvpf3A/exec?callback=ctrlq&name=RDK8&id=8&action=insert
-// https://script.google.com/macros/s/AKfycbxXxyBdUQXZI0pi9dgTE0HuFM8VwuKf2Kk0NVtAlFvKTSvpf3A/exec?action=read
-// https://script.google.com/macros/s/AKfycbxXxyBdUQXZI0pi9dgTE0HuFM8VwuKf2Kk0NVtAlFvKTSvpf3A/exec?callback=ctrlq&name=INYRDK8&id=8&action=update
-// https://script.google.com/macros/s/AKfycbxXxyBdUQXZI0pi9dgTE0HuFM8VwuKf2Kk0NVtAlFvKTSvpf3A/exec?callback=ctrlq&name=INYRDK8&id=8&action=delete
+
+// https://script.google.com/macros/s/AKfycbyOR8lLAK8WHrRQazjg9IdJYlXTYEFIxIKnL4XRihPeBd3ETL2j/exec?callback=ctrlq&name=RDK8&id=8&action=insert
+// https://script.google.com/macros/s/AKfycbyOR8lLAK8WHrRQazjg9IdJYlXTYEFIxIKnL4XRihPeBd3ETL2j/exec?action=read
+// https://script.google.com/macros/s/AKfycbyOR8lLAK8WHrRQazjg9IdJYlXTYEFIxIKnL4XRihPeBd3ETL2j/exec?callback=ctrlq&name=INYRDK8&id=8&action=update
+// https://script.google.com/macros/s/AKfycbyOR8lLAK8WHrRQazjg9IdJYlXTYEFIxIKnL4XRihPeBd3ETL2j/exec?callback=ctrlq&name=INYRDK8&id=8&action=delete
 
   
   // Make an AJAX call to Google Script
@@ -54,8 +55,8 @@
 	 document.getElementById("loader").style.visibility = "visible";
 	$('#mySpinner').addClass('spinner');
 
-var id1=	$("#id").val();
-	var name= $("#name").val();
+	var id1 = $("#id").val();
+	var name = $("#name").val();
 	
 	
     var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=insert";
@@ -118,7 +119,7 @@ function read_value() {
 $("#re").css("visibility","hidden");
    
    document.getElementById("loader").style.visibility = "visible";
- var url = script_url+"?action=read";
+ var url = script_url+"?action=readAll";
 
 $.getJSON(url, function (json) {
 
@@ -131,18 +132,22 @@ $.getJSON(url, function (json) {
 		var row = header.insertRow(0);     
 		var cell1 = row.insertCell(0);
 		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
 	
-		cell1.innerHTML = "<b>ID</b>";
-		cell2.innerHTML = "<b>Name</b>";
+		cell1.innerHTML = "<b>PKID</b>";
+		cell2.innerHTML = "<b>EMAIL</b>";
+		cell3.innerHTML = "<b>PASSWORD</b>";
         
         // ADD JSON DATA TO THE TABLE AS ROWS.
         for (var i = 0; i < json.records.length; i++) {
 
             tr = table.insertRow(-1);
 				var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = json.records[i].ID;
+                		tabCell.innerHTML = json.records[i].PKID;
 				tabCell = tr.insertCell(-1);
-				tabCell.innerHTML = json.records[i].NAME;
+				tabCell.innerHTML = json.records[i].EMAIL;
+				tabCell = tr.insertCell(-1);
+				tabCell.innerHTML = json.records[i].PASSWORD;
             }
       
 
@@ -166,10 +171,10 @@ $.getJSON(url, function (json) {
 <p>Coming live ...<p>
 
 <form >
-ID
+PKID
 <input type = "text" name ="id" id="id">
 </br></br></br>
-Name
+Email
 <input type = "text" name ="name" id="name">
 </form>
 
